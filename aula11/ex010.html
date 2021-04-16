@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../aula11/img/favicon-32x32.png" type="image/x-icon">
+    <title>Detran</title>
+</head>
+<body>
+    <main>
+        <img src="img/detran-logo.png" alt="logo" >
+        <h1>Sistemas de Multas</h1>
+        Velociade do carro: <input type="number" name="txtvel" id="txtvel"> Km/h
+        <input type="button" value="Verificar" onclick="calcular()">
+        <div id="res">
+
+        </div>
+    </main>
+    <script>
+        function calcular(){
+            var txtv = document.getElementById('txtvel')
+            var res = document.getElementById('res')
+            var vel = Number(txtv.value)
+            res.innerHTML = `<p>Sua velocidade atual é de <strong>${vel} Km/h</strong></p>`
+            
+            if (vel > 60) {
+                var vel_acima = vel - 60
+                res.innerHTML += `<p>Voce foi <strong>MULTADO!</strong></br> Você está <strong>${vel_acima}Km/h</strong> acima da velocidade Permitida!</p>`
+                    if (vel_acima >= 0 && vel_acima <= 20) {
+                        var multa = vel_acima * 1.8
+                        var totmulta = multa + (multa * 20 / 100)
+                        res.innerHTML += `<p>Seu total a pagar é de <strong>R$${multa.toFixed(2)}</strong>, mas você excedeu <strong>${vel_acima}Km/h</strong></br>Por isso você irá pagar a mais <strong>20% do total!</strong></br>Seu valor final é de: <strong>R$${totmulta.toFixed(2)}</strong></p>`
+                    }else if (vel_acima >= 20 && vel_acima <= 40) {
+                        var multa = vel_acima * 1.8
+                        var totmulta = multa + (multa * 40 / 100)
+                        res.innerHTML += `<p>Seu total a pagar é de <strong>R$${multa.toFixed(2)}</strong>, mas você excedeu <strong>${vel_acima}Km/h</strong></br>Por isso você irá pagar a mais <strong>40% do total!</strong></br>Seu valor final é de: <strong>R$${totmulta.toFixed(2)}</strong></p>`
+                    }else {
+                        var multa = vel_acima * 1.8
+                        var totmulta = multa + (multa * 60 / 100)
+                        res.innerHTML += `<p>Seu total a pagar é de <strong>R$${multa.toFixed(2)}</strong>, mas você excedeu <strong>${vel_acima}Km/h</strong></br>Por isso você irá pagar a mais <strong>60% do total!</strong></br>Seu valor final é de: <strong>R$${totmulta.toFixed(2)}<strong></p>`
+                    }
+            } if (vel < 15) {
+                res.innerHTML += `<p>Voce está muito <strong>ABAIXO</strong> da velocidade permitida, Você pode Causar um <strong>ACIDENTE!</strong></p>`
+            }
+            res.innerHTML += `<p>Dirija com segurança!</p>`
+        }
+    </script>
+</body>
+</html>
